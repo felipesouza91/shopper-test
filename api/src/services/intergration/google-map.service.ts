@@ -1,7 +1,7 @@
 import { CalculateRoutes, CalculateRoutesResponse, Position } from "@/contracts/integration/calculate-routes";
 import { RoutesClient } from '@googlemaps/routing';
 
-export class GoogleMapService implements CalculateRoutes {
+export default class GoogleMapService implements CalculateRoutes {
 
   constructor(private googleClientRouting: RoutesClient) { }
 

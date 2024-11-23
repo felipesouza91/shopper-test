@@ -1,15 +1,5 @@
-
-export interface HttpRequest {
-  body?: any,
-  headers?: any
-}
-
-export interface HttpResponse {
-  body?: any,
-  statusCode: number
-}
-
+import { Request, Response } from "express";
 
 export interface Controller {
-  handle(request: HttpRequest): Promise<HttpResponse>
+  handle(request: Request, resonse: Response): Promise<Response>
 }
