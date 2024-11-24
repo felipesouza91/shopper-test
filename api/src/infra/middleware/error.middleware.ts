@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ValidationError } from "../exceptions/validation-error";
+import { ValidationError } from "../../domain/exceptions/validation-error";
 
 export default function errorMiddleware(err: Error, request: Request, response: Response, next: NextFunction) {
   console.error(err)

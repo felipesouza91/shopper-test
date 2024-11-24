@@ -1,11 +1,11 @@
 
-interface DriveInput {
+export interface DriveInput {
     id: number
     name: string
 }
 
 
-interface ConfirmRideServiceInput {
+export interface ConfirmRideServiceInput {
   customer_id: string
   origin: string
   destination: string

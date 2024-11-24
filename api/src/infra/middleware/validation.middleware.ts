@@ -1,6 +1,6 @@
 import { Validation } from "@/contracts/validation";
 import { ZodError, ZodSchema } from "zod";
-import { ValidationError } from "../exceptions/validation-error";
+import { ValidationError } from "../../domain/exceptions/validation-error";
 
 
 export default class ZodValidation<T> implements Validation {

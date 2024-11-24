@@ -1,9 +1,10 @@
 import EstimateRideController from "@/controllers/estimate-ride/estimate-ride.controller";
 import ZodValidation from "@/infra/middleware/validation.middleware";
-import GoogleMapService from "@/services/intergration/google-map.service";
+import GoogleMapService from "@/services/google-map.service";
 import { RoutesClient } from "@googlemaps/routing";
 import { Request, Response, Router } from "express";
 import { z } from "zod";
+import { envs } from "../config/envs";
 
 const estimateRoute = Router()
 
@@ -15,7 +16,7 @@ const estimateRateShema = z.object({
 
 type EstimateRateInput = z.infer<typeof estimateRateShema>
 const routingClient = new RoutesClient({
-  apiKey: process.env.GOOGLE_API_KEY,
+  apiKey: envs.GOOGLE_MAPS_API,
 })
 
 
@@ -24,7 +25,7 @@ estimateRoute.post('/', async (req: Request, res: Response) => {
   const calculateRoute = new GoogleMapService(routingClient)
   const estimateRateController = new EstimateRideController(validation, calculateRoute)
 
-  return  await estimateRateController.handle(req, res)
+  return await estimateRateController.handle(req, res)
 })
 
 

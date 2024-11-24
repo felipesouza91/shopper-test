@@ -1,13 +1,14 @@
-import { Controller, HttpRequest, HttpResponse } from "@/contracts/controller";
-import { ConfirmRideService } from "@/contracts/services/ride-service";
+import { Controller } from "@/contracts/controller";
+import { ConfirmRideService } from "@/domain/services/ride-service";
+import { Request, Response } from "express";
 
 export class ConfirmRideController implements Controller{
 
-  constructor(private confirmRideService: ConfirmRideService) {}
-
-  async handle(request: HttpRequest): Promise<HttpResponse> {
-    const { body } = request;
-    await this.confirmRideService.executer(body)
+  constructor(private confirmRideService: ConfirmRideService) { }
+  
+  handle(request: Request, response: Response): Promise<Response> {
+    
   }
+
 
 }

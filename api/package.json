@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect  --respawn --transpile-only ./src/server.ts",
+    "dev:debug": "ts-node-dev -r tsconfig-paths/register --transpile-only --respawn --inspect=4321 --project ./src/server.ts",
     "test": "jest"
   },
   "keywords": [],
@@ -33,6 +34,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-async-errors": "^3.1.1",
+    "mariadb": "^3.4.0",
+    "sequelize": "^6.37.5",
     "zod": "^3.23.8"
   }
 }

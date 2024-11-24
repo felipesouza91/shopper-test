@@ -1,6 +1,6 @@
+import { RideModel } from "@/domain/models/ride.model";
 import { Request, Response, Router } from "express";
 import { z } from "zod";
-import { validateData } from "../middleware/validation.middleware";
 
 
 const rideRouter = Router()
@@ -20,4 +20,11 @@ const confirmationRide = z.object({
 
 
 
-rideRouter.patch("/ride/confirm", validateData(confirmationRide), )
+rideRouter.patch("/", async (req: Request, res: Response) => {
+  const modelInit = await RideModel.create({})
+     const save = await modelInit.save()
+  return res.status(200).json()
+})
+
+
+export { rideRouter };

@@ -1,24 +1,20 @@
-import cors from 'cors';
 import 'dotenv/config';
-import express from 'express';
 import 'express-async-errors';
-import errorMiddleware from './infra/middleware/error.middleware';
-import appRoutes from './infra/routes';
-
-
+import { sequelizeAppConnection } from './infra/config/database-config';
+import { app } from './infra/http/app';
 
 const port = process.env.PORT || 8080;
-const app = express();
 
-app.use(express.json())
-app.use(cors())
+const start = async () => {
+  try {
+    await sequelizeAppConnection.sync()
+    app.listen(port, async () => {
+      console.log(`[server]: Server is running at http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
 
-app.use(appRoutes)
-
-
-app.use(errorMiddleware);
-
-
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+start()
