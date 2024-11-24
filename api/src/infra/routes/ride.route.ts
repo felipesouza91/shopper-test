@@ -1,16 +1,20 @@
-import { RideModel } from "@/domain/models/ride.model";
+import { ConfirmRideController } from "@/controllers/confirm-ride/confirm-ride.controller";
+import ConfirmRideServiceImpl from "@/services/confirm-ride.service";
 import { Request, Response, Router } from "express";
 import { z } from "zod";
+import { SaveRideRepositoryImpl } from "../database/save-ride.repository";
+import ZodValidation from "../middleware/validation.middleware";
+import { FindDriverByIdRepositoryImpl } from './../database/find-driver-by-id.repository';
 
 
 const rideRouter = Router()
 
-const confirmationRide = z.object({
+const rideConfirmation = z.object({
   customer_id: z.string({message: "Campo Obrigatorio"}),
   origin: z.string({message: "Campo Obrigatorio"}),
   destination: z.string({ message: "Campo Obrigatorio" }),
   distance: z.number({message: "Campo obrigatorio"}),
-  duration: z.number({message: "Campo obrigatorio"}),
+  duration: z.string({message: "Campo obrigatorio"}),
   driver: z.object({
     id: z.number(),
     name: z.string()
@@ -18,12 +22,16 @@ const confirmationRide = z.object({
   value: z.number()
 })
 
+type RideConfirmationData = z.infer<typeof rideConfirmation>
 
 
 rideRouter.patch("/", async (req: Request, res: Response) => {
-  const modelInit = await RideModel.create({})
-     const save = await modelInit.save()
-  return res.status(200).json()
+  const validation = new ZodValidation<RideConfirmationData>(rideConfirmation)
+  const saveRideRepository = new SaveRideRepositoryImpl()
+  const findDriverByIdRepository = new FindDriverByIdRepositoryImpl()
+  const confirmRideService = new ConfirmRideServiceImpl(saveRideRepository, findDriverByIdRepository)
+  const controller = new ConfirmRideController(validation, confirmRideService)
+  return controller.handle(req, res)
 })
 
 

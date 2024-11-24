@@ -5,10 +5,8 @@ export class SaveRideRepositoryImpl implements SaveRideRepository {
 
    async execute(input: SaveRideInput): Promise<SaveRideResponse> {
    const modelInit = await RideModel.create(input)
-     const save = await modelInit.save()
-     return {
-       
-     } as SaveRideResponse
+     const {dataValues } = await modelInit.save()
+     return dataValues
   }
 
 }

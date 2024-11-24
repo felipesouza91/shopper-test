@@ -7,7 +7,7 @@ export type SaveRideResponse = {
   destination: string
   distance: number
   duration: string
-  drive_id: number
+  driver_id: number
   value: number
 }
 

@@ -11,10 +11,10 @@ export interface ConfirmRideServiceInput {
   destination: string
   distance: number
   duration: string
-  drive: DriveInput
+  driver: DriveInput
   value: number
 }
 
 export interface ConfirmRideService {
-  executer(data: ConfirmRideServiceInput): Promise<void>
+  execute(data: ConfirmRideServiceInput): Promise<void>
 }

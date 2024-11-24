@@ -13,6 +13,7 @@ export default class ZodValidation<T> implements Validation {
       return parsedValue
     } catch (error: unknown) {
       if (error instanceof ZodError) {
+        console.error(error.errors)
         const path = error.errors[0].path
         let message = ''
         if (path) {

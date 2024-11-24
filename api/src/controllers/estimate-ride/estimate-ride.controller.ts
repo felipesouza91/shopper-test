@@ -22,7 +22,7 @@ export default class EstimateRideController implements Controller {
         ...rest,
         value: resume.distance/1000 * tax
       }
-    })
+    }).sort( (fist, next) => fist.value > next.value ? 1 : -1)
     const data = {  
       ...resume,
       options,

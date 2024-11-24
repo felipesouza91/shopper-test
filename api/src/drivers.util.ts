@@ -1,15 +1,16 @@
-interface Driver {
+type Review = {
+  rating: number
+  comment: string
+}
+type Driver = {
   id: number
   name: string
   description: string
   vehicle: string
-  review: {
-    rating: number,
-    comment: string
-  }
+  review: Review
   tax: number
   minKm: number
-}
+} 
 
 export const driver: Driver[] = [
   {
