@@ -1,5 +1,6 @@
 import { DriverMinKmError } from "@/domain/exceptions/driver-min-km-error";
 import { DriverNotFoundError } from "@/domain/exceptions/driver-not-found-error";
+import { InvalidDriverError } from "@/domain/exceptions/invalid-driver-error";
 import { NextFunction, Request, Response } from "express";
 import { ValidationError } from "../../domain/exceptions/validation-error";
 
@@ -21,6 +22,12 @@ export default function errorMiddleware(err: Error, request: Request, response: 
   if (err instanceof DriverNotFoundError ) {
     return response.status(404).json({
       error_code:"DRIVER_NOT_FOUND",
+      error_description:err.message
+    })
+  }
+  if (err instanceof InvalidDriverError ) {
+    return response.status(406).json({
+      error_code:"INVALID_DRIVER",
       error_description:err.message
     })
   }

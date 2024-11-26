@@ -4,7 +4,6 @@ export interface DriveInput {
     name: string
 }
 
-
 export interface ConfirmRideServiceInput {
   customer_id: string
   origin: string
@@ -15,6 +14,6 @@ export interface ConfirmRideServiceInput {
   value: number
 }
 
-export interface ConfirmRideService {
+export interface ConfirmRide {
   execute(data: ConfirmRideServiceInput): Promise<void>
 }

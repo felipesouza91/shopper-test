@@ -2,9 +2,9 @@ import { DriverMinKmError } from "@/domain/exceptions/driver-min-km-error";
 import { DriverNotFoundError } from "@/domain/exceptions/driver-not-found-error";
 import { FindDriverByIdRepository } from "@/domain/repository/find-driver-by-id.repository";
 import { SaveRideRepository } from "@/domain/repository/save-ride-repositoy";
-import { ConfirmRideService, ConfirmRideServiceInput } from "@/domain/services/ride-service";
+import { ConfirmRide, ConfirmRideServiceInput } from "@/domain/services/ride-service";
 
-export default class ConfirmRideServiceImpl implements ConfirmRideService {
+export default class ConfirmRideServiceImpl implements ConfirmRide {
 
   constructor(
     private confirmRideRepository: SaveRideRepository,

@@ -26,7 +26,7 @@ const DriverModel = sequelizeAppConnection.define(
       type: DataTypes.STRING
     },
     tax: {
-      type: DataTypes.INTEGER
+      type: DataTypes.FLOAT
     },
     minKm: {
       type: DataTypes.DOUBLE
