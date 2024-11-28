@@ -1,5 +1,6 @@
 import { sequelizeAppConnection } from "@/infra/config/database-config";
 import { DataTypes } from "sequelize";
+import { RideModel } from "./ride.model";
 
 
 const DriverModel = sequelizeAppConnection.define(
@@ -33,6 +34,16 @@ const DriverModel = sequelizeAppConnection.define(
     }
   }
 )
+
+DriverModel.hasMany(RideModel, {
+  foreignKey: 'driver_id',
+  as: "driver_id"
+})
+
+RideModel.belongsTo(DriverModel, {
+  foreignKey: 'driver_id',
+  
+})  
 
 
 export { DriverModel };

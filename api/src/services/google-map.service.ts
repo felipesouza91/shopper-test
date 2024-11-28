@@ -1,4 +1,5 @@
 import { CalculateRoutes, CalculateRoutesResponse, Position } from "@/contracts/integration/calculate-routes";
+import { CalculateRouteError } from "@/domain/exceptions/calculate-router-error";
 import { RoutesClient } from '@googlemaps/routing';
 
 export default class GoogleMapService implements CalculateRoutes {
@@ -25,9 +26,8 @@ export default class GoogleMapService implements CalculateRoutes {
       })
 
       if (!result) {
-        throw new Error('Error during calculate router')
+        throw new CalculateRouteError('Error during calculate router')
       }
-  
       const distance = result?.[0].routes?.[0].distanceMeters as number
       const duration = result?.[0].routes?.[0].duration?.seconds as string
       const origin = result?.[0].routes?.[0].legs?.[0]?.startLocation?.latLng as Position
@@ -42,7 +42,7 @@ export default class GoogleMapService implements CalculateRoutes {
     }
     catch (error) {
       console.error(error)
-      throw new Error('Error during calculate router')
+      throw new CalculateRouteError('Error during calculate router')
     }
     
   }

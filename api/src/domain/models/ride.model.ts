@@ -32,7 +32,10 @@ const RideModel = sequelizeAppConnection.define(
       type: DataTypes.DOUBLE
     }
   }
+
+  
 )
+
 
 
 export { RideModel };
