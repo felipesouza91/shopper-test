@@ -8,3 +8,28 @@ services:
       MARIADB_DATABASE: shopper
       MARIADB_PASSWORD: app
       MARIADB_USER: app
+
+  api:
+    build:
+      context: ./api
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: mariadb://app:app@database:3306/shopper
+    depends_on:
+      - database
+    command: /bin/bash ./wait-for-it.sh -t 40 database:3306 -- npm run dev
+
+  web:
+    build:
+      context: ./web
+    ports:
+      - 80:80
+    env_file:
+      - .env
+    environment:
+      VITE_API_URL: http://localhost:8080
+    depends_on:
+      - api
